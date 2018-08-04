@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+    web:
+        scale: 1
+        start_on_create: true
+        upgrade_strategy:
+            start_first: true
+        health_check:
+            healthy_threshold: "2"
+            initializing_timeout: "60000"
+            interval: "10000"
+            port: "80"
+            reinitializing_timeout: "60000"
+            response_timeout: "2000"
+            strategy: recreate
+            unhealthy_threshold: "3"
+
+catalog:
+    name: Apache
+    version: 2.4.33
+    minimum_rancher_version: 1.6.7
+    questions:
+        - variable: APACHE_SERVER_NAME
+          label: Server Name
+          description: "https://httpd.apache.org/docs/2.4/en/mod/core.html#servername"
+          type: string
+          require: false
+
+        - variable: APACHE_SERVER_ADMIN
+          label: "Server Admin"
+          description: "https://httpd.apache.org/docs/2.4/en/mod/core.html#serveradmin"
+          type: "string"
+          require: false
+
+        - variable: APACHE_MODULE_ENABLE
+          label: "Enable apache modules"
+          type: "string"
+          require: false
+
+        - variable: APACHE_MODULE_DISABLE
+          label: "Disable apache modules"
+          type: "string"
+          required: false

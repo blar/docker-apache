@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# apache2-module-enable file_cache
+
+echo '<IfModule file_cache>' > /etc/apache2/modules-enabled/file_cache.conf
+find /var/www/html/htdocs -type f -print | sed -e 's/.*/MMapFile &/' >> /etc/apache2/modules-enabled/file_cache.conf
+echo '</IfModule>' >> /etc/apache2/modules-enabled/file_cache.conf

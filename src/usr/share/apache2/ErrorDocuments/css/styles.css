@@ -1,0 +1,35 @@
+html {
+  background-color: #eee;
+  font-family: Sans-serif;
+  padding-top: 4em;
+}
+
+h1 {
+  color: #666;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 768px;
+  background-color: #fff;
+  padding: 1em 2em;
+}
+
+.button {
+  color: #666;
+  display: inline-block;
+  text-decoration: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #666;
+  border-radius: 0.5em;
+  line-height: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.button:hover {
+  color: #999;
+  border-color: #999;
+}
+/*# sourceMappingURL=styles.css.map */

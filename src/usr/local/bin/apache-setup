@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+apk add --no-cache apache2=~$APACHE_VERSION apache2-proxy=~$APACHE_VERSION
+
+mkdir /run/apache2
+chown apache: /run/apache2
+
+mkdir /var/cache/apache2
+chown apache: /var/cache/apache2
+
+apache-module-enable mime mpm_event unixd security
+apache-module-enable alias authz_core dir log_config
+apache-module-enable deflate expires headers rewrite
+# apache2-module-enable negotiation
+# apache2-module-enable setenvif
+# apache2-module-enable error-documents negotiation
+# apache2-module-enable cache cache_disk cache_socache
+# apache2-module-enable cache cache_socache
+# apache2-file-cache-generate

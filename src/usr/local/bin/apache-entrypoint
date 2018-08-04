@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+set -e
+
+# if [ "$APPLICATION_ENV" == "development" ]; then
+#     apache2-module-enable alias_development
+# fi
+
+if [ -n "$APACHE_MODULE_ENABLE" ]; then
+    apache-module-enable $APACHE_MODULE_ENABLE
+fi
+
+if [ -n "$APACHE_MODULE_DISABLE" ]; then
+    apache-module-disable $APACHE_MODULE_DISABLE
+fi
+
+if [ "$1" = "httpd" ]; then
+    set -- "$@" -DFOREGROUND
+fi;
+
+exec "$@"

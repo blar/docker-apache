@@ -1,0 +1,26 @@
+<%set var="REQUEST_URI_FULL" value="$REQUEST_SCHEME://$HTTP_HOST$REQUEST_URI" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, notranslate, noimageindex" />
+        <title>404: Not found</title>
+        <link rel="stylesheet" href="/apache2/ErrorDocuments/css/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>404: Not found</h1>
+            <p>Die angeforderte Datei wurde nicht auf dem Server gefunden.</p>
+
+            <a href="/" class="button">Zur Startseite</a>
+            <a href="mailto:<%echo var="SERVER_ADMIN" %>?subject=Seite nicht gefunden&body=Die Seite <%echo var="REQUEST_URI_FULL" %> wurde nicht gefunden." class="button">Fehler melden</a>
+
+            <h2>Mögliche Ursachen</h2>
+            <ul>
+                <li>Die Datei wurde gelöscht.</li>
+            </ul>
+
+            <img src="/foo.png" />
+        </div>
+    </body>
+</html>

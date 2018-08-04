@@ -1,0 +1,28 @@
+stages:
+    - build
+
+variables:
+    APACHE2_VERSION: 2.4
+
+apache2-amd64:
+    stage: build
+    image: foobox/docker
+    command:
+        - docker build --build-arg ARCH=amd64 --build-arg APACHE2_VERSION=$APACHE2_VERSION --tag foobox/apache2:$APACHE2_VERSION-amd64 .
+        - docker push foobox/apache2:$APACHE2_VERSION-amd64
+
+apache2-arm32v6:
+    stage: build
+    image: foobox/docker
+    command:
+	    - docker build --build-arg ARCH=arm32v6 --build-arg APACHE2_VERSION=$APACHE2_VERSION  --tag foobox/apache2:$APACHE2_VERSION-arm32v6  .
+	    - docker push foobox/apache2:$APACHE2_VERSION-arm32v6
+
+manifest:
+    stage: build
+    image: foobox/docker
+	commands:
+	    - docker manifest create --amend foobox/apache2:$APACHE2_VERSION foobox/apache2:$APACHE2_VERSION-amd64 foobox/apache2:$APACHE2_VERSION-arm32v6
+	    - docker manifest annotate foobox/apache2:$APACHE2_VERSION foobox/apache2:$APACHE2_VERSION-amd64 --os linux --arch amd64
+	    - docker manifest annotate foobox/apache2:$APACHE2_VERSION foobox/apache2:$APACHE2_VERSION-arm32v6 --os linux --arch arm --variant v6
+	    - docker manifest push --purge foobox/apache2:$APACHE2_VERSION
