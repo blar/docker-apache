@@ -3,6 +3,9 @@
 set -e
 apk add --no-cache apache2=~$APACHE_VERSION apache2-proxy=~$APACHE_VERSION
 
+mkdir /etc/apache2/modules-enabled/
+chown apache: /etc/apache2/modules-enabled
+
 mkdir /run/apache2
 chown apache: /run/apache2
 
