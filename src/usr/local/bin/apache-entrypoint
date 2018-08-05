@@ -3,7 +3,7 @@
 set -e
 
 # if [ "$APPLICATION_ENV" == "development" ]; then
-#     apache2-module-enable alias_development
+#     apache-module-enable alias_development
 # fi
 
 if [ -n "$APACHE_MODULE_ENABLE" ]; then

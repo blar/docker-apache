@@ -2,4 +2,4 @@ version: "2"
 
 services:
     web:
-        image: foobox/apache:2.4.33
+        image: foobox/apache:2.4

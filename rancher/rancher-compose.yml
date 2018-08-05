@@ -18,7 +18,7 @@ services:
 
 catalog:
     name: Apache
-    version: 2.4.33
+    version: 2.4
     minimum_rancher_version: 1.6.7
     questions:
         - variable: APACHE_SERVER_NAME
@@ -30,15 +30,15 @@ catalog:
         - variable: APACHE_SERVER_ADMIN
           label: "Server Admin"
           description: "https://httpd.apache.org/docs/2.4/en/mod/core.html#serveradmin"
-          type: "string"
+          type: string
           require: false
 
         - variable: APACHE_MODULE_ENABLE
           label: "Enable apache modules"
-          type: "string"
+          type: string
           require: false
 
         - variable: APACHE_MODULE_DISABLE
           label: "Disable apache modules"
-          type: "string"
+          type: string
           required: false

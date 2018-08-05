@@ -3,19 +3,24 @@ VCS_URL := $(shell git config --get remote.origin.url)
 VCS_REF := $(shell git rev-parse --short HEAD)
 
 ALPINE_VERSION := 3.8
-APACHE_VERSION := 2.4.33
+APACHE_VERSION := 2.4
 IMAGE_TAG := $(APACHE_VERSION)
-IMAGE_NAME := foobox/apache:$(IMAGE_TAG)
+IMAGE_NAME ?= foobox/apache:$(IMAGE_TAG)
 
-all: amd64-build arm32v6-build
+all: build
+
+build: amd64-build arm32v6-build
+
+push: amd64-push arm32v6-push
 
 amd64-build:
 	docker build \
-	    --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
-	    --build-arg ARCH=amd64 \
+		--force-rm \
 	    --build-arg BUILD_DATE=$(BUILD_DATE) \
 	    --build-arg VCS_URL=$(VCS_URL) \
 	    --build-arg VCS_REF=$(VCS_REF) \
+	    --build-arg ARCH=amd64 \
+	    --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
 	    --build-arg APACHE_VERSION=$(APACHE_VERSION) \
 	    --tag $(IMAGE_NAME)-amd64 .
 
@@ -24,11 +29,12 @@ amd64-push: amd64-build
 
 arm32v6-build:
 	docker build \
-	    --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
-	    --build-arg ARCH=arm32v6 \
+		--force-rm \
 	    --build-arg BUILD_DATE=$(BUILD_DATE) \
 	    --build-arg VCS_URL=$(VCS_URL) \
 	    --build-arg VCS_REF=$(VCS_REF) \
+	    --build-arg ARCH=arm32v6 \
+	    --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
 	    --build-arg APACHE_VERSION=$(APACHE_VERSION) \
 	    --tag $(IMAGE_NAME)-arm32v6 .
 

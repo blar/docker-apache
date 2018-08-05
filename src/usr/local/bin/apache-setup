@@ -12,9 +12,9 @@ chown apache: /var/cache/apache2
 apache-module-enable mime mpm_event unixd security
 apache-module-enable alias authz_core dir log_config
 apache-module-enable deflate expires headers rewrite
-# apache2-module-enable negotiation
-# apache2-module-enable setenvif
-# apache2-module-enable error-documents negotiation
-# apache2-module-enable cache cache_disk cache_socache
-# apache2-module-enable cache cache_socache
-# apache2-file-cache-generate
+# apache-module-enable negotiation
+# apache-module-enable setenvif
+# apache-module-enable error-documents negotiation
+# apache-module-enable cache cache_disk cache_socache
+# apache-module-enable cache cache_socache
+# apache-file-cache-generate
